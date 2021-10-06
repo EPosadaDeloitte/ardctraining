@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved. -->
+
+    <process onError="error" processClass="com.ardctraining.core.model.CustomProductLabelCleanupEmailProcessModel"
+             name="customLabelCleanupEmailProcess" start="generateCustomLabelCleanupEmail"
+             xmlns="http://www.hybris.de/xsd/processdefinition">
+
+        <action bean="generateCustomLabelCleanupEmail" id="generateCustomLabelCleanupEmail">
+
+            <transition name="OK" to="sendEmail"/>
+
+            <transition name="NOK" to="error"/>
+
+        </action>
+
+
+        <action bean="sendEmail" id="sendEmail">
+
+            <transition name="OK" to="removeSentEmail"/>
+
+            <transition name="NOK" to="failed"/>
+
+        </action>
+
+
+        <action bean="removeSentEmail" id="removeSentEmail">
+
+            <transition name="OK" to="success"/>
+
+            <transition name="NOK" to="error"/>
+
+        </action>
+
+        <end id="error" state="ERROR">Something went wrong.</end>
+
+        <end id="failed" state="FAILED">Could not send customer registration email.</end>
+
+        <end id="success" state="SUCCEEDED">Sent customer registration email.</end>
+
+    <!--<?xml version="1.0" encoding="utf-8"?>
+&lt;!&ndash;
+ Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
+&ndash;&gt;
+<process xmlns="http://www.hybris.de/xsd/processdefinition" start="generateCustomLabelCleanupEmail" name="customLabelCleanupEmailProcess"
+         processClass="com.ardctraining.core.model.CustomProductLabelModel" onError="error">
+
+    <action id="generateCustomerRegistrationEmail" bean="generateCustomerRegistrationEmail">
+        <transition name="OK" to="sendEmail"/>
+        <transition name="NOK" to="error"/>
+    </action>
+
+    <action id="sendEmail" bean="sendEmail">
+        <transition name="OK" to="removeSentEmail"/>
+        <transition name="NOK" to="failed"/>
+    </action>
+
+    <action id="removeSentEmail" bean="removeSentEmail">
+        <transition name="OK" to="success"/>
+        <transition name="NOK" to="error"/>
+    </action>
+
+    <end id="error" state="ERROR">Something went wrong.</end>
+    <end id="failed" state="FAILED">Could not send customer registration email.</end>
+    <end id="success" state="SUCCEEDED">Sent customer registration email.</end>
+
+</process>-->
+
+    </process>

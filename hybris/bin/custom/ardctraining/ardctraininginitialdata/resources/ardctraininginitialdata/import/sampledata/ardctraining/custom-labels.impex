@@ -1,0 +1,24 @@
+$catalog = electronicsProductCatalog
+$version = Online
+$catalogVersion = catalogVersion(catalog(id)[default=$catalog], version[default=$version])[default=$catalog:$version]
+
+INSERT_UPDATE CustomProductLabel; customer(uid)[unique = true]; product(code, $catalogVersion)[unique = true]; label[unique = true]; validityDate[dateformat = yyyy.MM.dd]; labelType(code)
+                                ; enposada@externosdeloittemx.com     ; 300938                                       ; Camera              ; 2021.12.31                           ; PRIMARY
+                                ; enposada@externosdeloittemx.com     ; 300938                                       ; CustomLabel1             ; 2021.12.31                           ; SECONDARY
+                                ; enposada@externosdeloittemx.com     ; 300938                                       ; CustomLabel2             ; 2021.12.31                           ; ALTERNATIVE
+
+INSERT_UPDATE CustomProductLabel; customer(uid)[unique = true]; product(code, catalogVersion(catalog(id), version))[unique = true]; label[unique = true]; validityDate[dateformat = yyyy.MM.dd]; labelType[translator = com.ardctraining.core.data.batch.CustomProductLabelLabelTypeTranslator]
+                                ; enposada@externosdeloittemx.com      ; 300938:$catalog:$version                                          ; Custom3             ; 2021.12.31                           ; P
+
+
+
+
+$catalog = electronicsProductCatalog
+$version = Online
+$catalogVersion = catalogVersion(catalog(id),version)
+
+INSERT_UPDATE CustomProductLabel; customer(uid)[unique = true]; product(code, $catalogVersion)[unique = true]; label[unique = true]; validityDate[dateformat = yyyy.MM.dd]; labelType(code)
+                                ; enposada@externosdeloittemx.com     ; 300938: $catalog:$version                                        ; Camera              ; 2021.12.31                           ; PRIMARY
+                                ; enposada@externosdeloittemx.com     ; 300938: $catalog:$version                                        ; CustomLabel1             ; 2021.12.31                           ; SECONDARY
+                                ; enposada@externosdeloittemx.com     ; 300938: $catalog:$version                                        ; CustomLabel2             ; 2021.12.31                           ; ALTERNATIVE
+

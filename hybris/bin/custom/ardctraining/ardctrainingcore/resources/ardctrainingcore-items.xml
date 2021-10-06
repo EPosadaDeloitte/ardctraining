@@ -8,6 +8,7 @@
         <collectiontype code="GenderList" elementtype="Gender" autocreate="true" generate="true" type="list"/>
         <collectiontype code="SwatchColorSet" elementtype="SwatchColorEnum" autocreate="true" generate="true"
                         type="set"/>
+        <collectiontype code="CustomLabelSet" elementtype="java.lang.String" autocreate="true" generate="true" type="set" />
     </collectiontypes>
 
     <enumtypes>
@@ -25,6 +26,12 @@
             <value code="WHITE"/>
             <value code="YELLOW"/>
         </enumtype>
+
+        <enumtype code="CustomLabelTypeEnum" generate="true" autocreate="true" dynamic="true">
+            <value code="PRIMARY"/>
+            <value code="SECONDARY"/>
+            <value code="ALTERNATIVE"/>
+        </enumtype>
     </enumtypes>
 
     <itemtypes>
@@ -32,6 +39,67 @@
         <!-- Add your item definitions here -->
 
         <typegroup name="ardctraining">
+            <itemtype code="CustomProductLabel" autocreate="true" generate="true"
+                jaloclass="com.ardctraining.core.jalo.CustomProductLabel">
+                <deployment table="custprodlabel" typecode="10602"/>
+                <attributes>
+                    <attribute qualifier="label" type="java.lang.String">
+                        <modifiers write="true" read="true" unique="true"/>
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="labelType" type="CustomLabelTypeEnum">
+                        <modifiers write="true" read="true" />
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="validityDate" type="java.util.date">
+                        <modifiers write="true" read="true" />
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="customer" type="customer">
+                        <modifiers write="true" read="true" unique="true" />
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="product" type="product">
+                        <modifiers write="true" read="true" unique="true" />
+                        <persistence type="property" />
+                    </attribute>
+                </attributes>
+
+                <indexes>
+                    <index name="pk_custprodlabel" unique="true">
+                        <key attribute="label" />
+                        <key attribute="customer" />
+                        <key attribute="product" />
+                    </index>
+                </indexes>
+            </itemtype>
+
+            <itemtype
+                    code="CustomProductLabelCleanupCronjob"
+                    generate="true"
+                    autocreate="true"
+                    extends="Cronjob"
+            >
+
+            </itemtype>
+
+            <itemtype code="CustomProductLabelCleanupEmailProcess"
+                      extends="StoreFrontProcess"
+                      generate="true"
+                      autocreate="true"
+            >
+                <attributes>
+                    <attribute qualifier="customLabels" type="CustomLabelSet">
+                        <modifiers read="true" write="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="language" type="language">
+                        <modifiers read="true" write="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                </attributes>
+            </itemtype>
+
             <itemtype code="Customer" autocreate="false" generate="false">
                 <attributes>
                     <attribute qualifier="company" type="java.lang.String">

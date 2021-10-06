@@ -3,6 +3,7 @@
  */
 package com.ardctraining.storefront.controllers.pages;
 
+import com.ardctraining.facades.product.ArdctrainingProductFacade;
 import de.hybris.platform.acceleratorfacades.futurestock.FutureStockFacade;
 import de.hybris.platform.acceleratorservices.controllers.page.PageType;
 import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.impl.ProductBreadcrumbBuilder;
@@ -111,6 +112,9 @@ public class ProductPageController extends AbstractPageController
 	@Resource(name = "futureStockFacade")
 	private FutureStockFacade futureStockFacade;
 
+	@Resource(name = "productFacade")
+	private ArdctrainingProductFacade ardctrainingProductFacade;
+
 	@RequestMapping(value = PRODUCT_CODE_PATH_VARIABLE_PATTERN, method = RequestMethod.GET)
 	public String productDetail(@PathVariable("productCode") final String encodedProductCode, final Model model,
 			final HttpServletRequest request, final HttpServletResponse response)
@@ -136,6 +140,9 @@ public class ProductPageController extends AbstractPageController
 		model.addAttribute(new ReviewForm());
 		model.addAttribute("pageType", PageType.PRODUCT.name());
 		model.addAttribute("futureStockEnabled", Boolean.valueOf(Config.getBoolean(FUTURE_STOCK_ENABLED, false)));
+
+		// add labels as attribute
+		model.addAttribute("labels",ardctrainingProductFacade.getCustomLabels(encodedProductCode));
 
 		final String metaKeywords = MetaSanitizerUtil.sanitizeKeywords(productData.getKeywords());
 		final String metaDescription = MetaSanitizerUtil.sanitizeDescription(productData.getDescription());
