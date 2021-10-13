@@ -231,5 +231,33 @@
 		<property name="configurationService" ref="configurationService"/>
 	</bean>
 
+
+<!-- Feedback -->
+	<alias name="defaultFeedbackPopulator" alias="feedbackPopulator" />
+	<bean id="defaultFeedbackPopulator" class="com.ardctraining.facades.populators.FeedbackPopulator" />
+
+	<alias name="defaultCustomerFeedbackDataConverter" alias="customerFeedbackDataConverter" />
+	<bean id="defaultCustomerFeedbackDataConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.ardctraining.facades.feedback.data.CustomerFeedbackData" />
+		<property name="populators">
+			<list>
+				<ref bean="feedbackPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultFeedbackFacade" alias="feedbackFacade"/>
+	<bean id="defaultFeedbackFacade" class="com.ardctraining.facades.feedback.impl.DefaultFeedbackFacade"
+		parent="defaultCustomerFacade"
+	>
+		<property name="feedbackService" ref="feedbackService" />
+		<property name="customerFeedbackDataConverter" ref="customerFeedbackDataConverter" />
+	</bean>
+
+	<bean id="feedbackEmailContext" class="com.ardctraining.facades.process.email.context.FeedbackEmailContext"
+		  parent="abstractEmailContext">
+		<property name="configurationService" ref="configurationService"/>
+	</bean>
+
 	<!-- END custom beans -->
 </beans>

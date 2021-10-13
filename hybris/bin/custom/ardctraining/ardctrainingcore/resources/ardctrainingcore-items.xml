@@ -32,6 +32,13 @@
             <value code="SECONDARY"/>
             <value code="ALTERNATIVE"/>
         </enumtype>
+
+        <enumtype code="FeedbackStatusEnum" generate="true" autocreate="true" dynamic="true" >
+            <value code="NOT_READ"/>
+            <value code="READ"/>
+            <value code="PAST_DUE"/>
+            <value code="READ_PASTDUE"/>
+        </enumtype>
     </enumtypes>
 
     <itemtypes>
@@ -99,6 +106,60 @@
                     </attribute>
                 </attributes>
             </itemtype>
+
+            <itemtype code="CustomerFeedback"
+                generate="true"
+                autocreate="true"
+                jaloclass="com.ardctraining.core.jalo.CustomerFeedback"
+            >
+                <deployment table="customerfeedback" typecode="10603"/>
+                <attributes>
+                    <attribute qualifier="customer" type="customer">
+                        <modifiers read="true" write="true" />
+<!--                        <modifiers read="true" write="true" unique="true"/>-->
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="read" type="boolean">
+                        <modifiers read="true" write="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="subject" type="java.lang.String">
+                        <modifiers write="true" read="true" />
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="message" type="java.lang.String">
+                        <modifiers write="true" read="true" />
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="submittedDate" type="java.util.date">
+                        <modifiers write="true" read="true" />
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="status" type="FeedbackStatusEnum">
+                        <modifiers write="false" read="true" />
+                        <persistence type="dynamic" attributeHandler="feedbackStatusAttributeHandler"/>
+                    </attribute>
+                </attributes>
+<!--                <indexes> used if feedback can only be used for 1 single customer -->
+<!--                    <index name="pk_customerfeedback" unique="true">-->
+<!--                        <key attribute="customer" />-->
+<!--                    </index>-->
+<!--                </indexes>-->
+            </itemtype>
+
+            <itemtype code="CustomerFeedbackEmailProcess"
+                      extends="StoreFrontProcess"
+                      generate="true"
+                      autocreate="true"
+            >
+                <attributes>
+                    <attribute qualifier="language" type="language">
+                        <modifiers read="true" write="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                </attributes>
+            </itemtype>
+
 
             <itemtype code="Customer" autocreate="false" generate="false">
                 <attributes>

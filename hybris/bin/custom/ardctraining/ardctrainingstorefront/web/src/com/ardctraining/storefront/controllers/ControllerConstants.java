@@ -118,6 +118,11 @@ public interface ControllerConstants
 				String ErrorNotFoundPage = "pages/error/errorNotFoundPage"; // NOSONAR
 			}
 
+			interface Feedback
+			{
+				String FeeedbackPage = "pages/feedback/feedbackPage";
+			}
+
 			interface Cart // NOSONAR
 			{
 				String CartPage = "pages/cart/cartPage"; // NOSONAR

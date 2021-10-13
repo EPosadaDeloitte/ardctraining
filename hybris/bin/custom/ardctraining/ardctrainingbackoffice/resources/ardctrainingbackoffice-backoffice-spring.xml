@@ -13,4 +13,6 @@
   	</bean>
 	<bean id="customProductLabelLabelProvider" class="com.ardctraining.backoffice.labels.CustomProductLabelLabel"/>
 
+	<bean id="customerFeedbackProvider" class="com.ardctraining.backoffice.labels.CustomerFeedbackLabel"/>
+
 </beans>

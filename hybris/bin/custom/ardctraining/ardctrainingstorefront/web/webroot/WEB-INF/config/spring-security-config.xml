@@ -321,7 +321,9 @@
     	<property name="parameterName" value="CSRFToken" />
 	</bean>
 	
-	<util:list id="csrfAllowedUrlPatternsList" />
+	<util:list id="csrfAllowedUrlPatternsList" >
+		<value>/feedback/*</value>
+	</util:list>
 	
 	<alias name="defaultCsrfProtectionMatcher" alias="csrfProtectionMatcher"/>
 	<bean id="defaultCsrfProtectionMatcher" class="com.ardctraining.storefront.security.CsrfProtectionMatcher">
