@@ -11,6 +11,7 @@
 #
 # Import the CMS content for the Powertools site emails
 #
+# run in staged, then in Online
 $contentCatalog = electronicsContentCatalog
 $contentCV = catalogVersion(catalog(id[default=$contentCatalog]), version[default=Staged])[default=$contentCatalog:Staged]
 

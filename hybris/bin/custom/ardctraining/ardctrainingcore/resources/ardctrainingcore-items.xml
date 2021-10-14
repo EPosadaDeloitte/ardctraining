@@ -153,6 +153,18 @@
                       autocreate="true"
             >
                 <attributes>
+<!--                    <attribute qualifier="customerFeedbackData" type="CustomerFeedback">-->
+<!--                        <modifiers read="true" write="true"/>-->
+<!--                        <persistence type="property"/>-->
+<!--                    </attribute>-->
+                    <attribute qualifier="subject" type="java.lang.String">
+                        <modifiers read="true" write="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="message" type="java.lang.String">
+                        <modifiers read="true" write="true"/>
+                        <persistence type="property"/>
+                    </attribute>
                     <attribute qualifier="language" type="language">
                         <modifiers read="true" write="true"/>
                         <persistence type="property"/>

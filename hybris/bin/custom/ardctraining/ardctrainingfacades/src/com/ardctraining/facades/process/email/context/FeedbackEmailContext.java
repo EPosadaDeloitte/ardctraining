@@ -20,6 +20,8 @@ public class FeedbackEmailContext extends AbstractEmailContext<CustomerFeedbackE
     public void init (CustomerFeedbackEmailProcessModel customerFeedbackEmailProcessModel, EmailPageModel emailPageModel) {
         super.init(customerFeedbackEmailProcessModel,emailPageModel);
         LOG.info("Entering init method for "+this.getClass().getSimpleName());
+        //getCustomerFeedbackData();
+        //customerFeedbackEmailProcessModel
     }
 
     @Override

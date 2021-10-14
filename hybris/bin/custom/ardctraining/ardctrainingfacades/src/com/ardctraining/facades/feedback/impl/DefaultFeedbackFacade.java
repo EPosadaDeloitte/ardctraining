@@ -50,6 +50,7 @@ public class DefaultFeedbackFacade extends DefaultCustomerFacade implements Feed
                 customerFeedbackModel.setCreationtime(customerFeedbackData.getCreationtime());
                 customerFeedbackModel.setMessage(customerFeedbackData.getMessage());
                 getFeedbackService().save(customerModel,customerFeedbackModel);
+
                 LOG.info("form was saved successfully");
                 return true;
             }

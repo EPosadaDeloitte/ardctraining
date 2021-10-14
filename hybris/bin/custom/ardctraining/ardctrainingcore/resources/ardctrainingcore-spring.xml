@@ -613,6 +613,10 @@
 	<bean id="defaultFeedbackService" class="com.ardctraining.core.feedback.service.impl.DefaultFeedbackService">
 		<property name="modelService" ref="modelService"/>
 		<property name="feedbackDao" ref="feedbackDao"/>
+
+		<property name="businessProcessService" ref="businessProcessService"/>
+		<property name="baseSiteService" ref="baseSiteService"/>
+		<property name="timeService" ref="timeService"/>
 	</bean>
 
 	<bean id="customerFeedbackEmailProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">

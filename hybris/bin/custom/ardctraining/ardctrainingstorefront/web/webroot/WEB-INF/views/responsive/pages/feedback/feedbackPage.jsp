@@ -21,9 +21,8 @@
 
         <form:form method="post" modelAttribute="feedbackForm" action="${x}" style="padding: 20px;">
             <h1>${pageTitle}</h1>
-            <h2>You can submit new feedback regarding your experience with us</h2>
+            <h2>You can submit new feedback regarding your experience with us. <br/> Please note the message should e longer than 10 characters long</h2>
 
-            choose for each label once redirected
             <formElement:formInputBox idKey="form.subject"
                 labelKey="form.subject" path="subject" inputCSS="form-control"
                 mandatory="true"
