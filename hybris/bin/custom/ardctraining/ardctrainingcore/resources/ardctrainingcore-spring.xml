@@ -583,7 +583,7 @@
 	</bean>
 
 	<bean id="customLabelCleanupEmailProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
-		<property name="resource" value="classpath:/ardctrainingcore/processes/sendCustomLabelCleanupEmailProcess.xml"/>
+		<property name="resource" value="classpath:/ardctrainingcore/processes/sendCustomProductLabelCleanupEmailProcess.xml"/>
 	</bean>
 
 	<bean id="generateCustomLabelCleanupEmail" parent="abstractGenerateEmailAction">

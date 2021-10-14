@@ -1,0 +1,38 @@
+## messageSource=classpath:/ardctrainingcore/messages/email-customLabelCleanup_$lang.properties
+<html>
+<head>
+    <style type="text/css">
+        body {
+            font: 12px Arial, Helvetica, sans-serif;
+            color: black;
+        }
+        table {
+            border-collapse: collapse;
+            font: 12px Arial, Helvetica, sans-serif;
+        }
+        td, th {
+            padding: 5px;
+            border: black 1px solid;
+        }
+        th {
+            background-color: #1b6ca8;
+            color: white;
+        }
+    </style>
+</head>
+<body bgcolor="#ffffff">
+
+<p>${ctx.messages.getMessage('message.line1')}<br />${ctx.messages.getMessage('message.line2')}</p>
+<p>${ctx.messages.getMessage('message.line2')}</p>
+
+<div>
+    ${ctx.message}
+</div>
+
+<p>
+    <strong>${ctx.messages.getMessage('message.regards')} <br />
+        ${ctx.messages.getMessage('message.line3')}</strong>
+</p>
+
+</body>
+</html>
