@@ -16,10 +16,17 @@ public class FeedbackEmailContext extends AbstractEmailContext<CustomerFeedbackE
     private ConfigurationService configurationService;
     private Logger LOG = Logger.getLogger(FeedbackEmailContext.class);
 
+    private String subject;
+    private String message;
+
     @Override
     public void init (CustomerFeedbackEmailProcessModel customerFeedbackEmailProcessModel, EmailPageModel emailPageModel) {
         super.init(customerFeedbackEmailProcessModel,emailPageModel);
         LOG.info("Entering init method for "+this.getClass().getSimpleName());
+        setSubject(customerFeedbackEmailProcessModel.getSubject());
+        setMessage(customerFeedbackEmailProcessModel.getMessage());
+        // optional, set customer
+
         //getCustomerFeedbackData();
         //customerFeedbackEmailProcessModel
     }
@@ -36,21 +43,20 @@ public class FeedbackEmailContext extends AbstractEmailContext<CustomerFeedbackE
 
     @Override
     protected BaseSiteModel getSite(CustomerFeedbackEmailProcessModel businessProcessModel) {
-        return null;
+        return businessProcessModel.getSite();
     }
 
     @Override
     protected CustomerModel getCustomer(CustomerFeedbackEmailProcessModel businessProcessModel) {
-        return null;
+        return (CustomerModel) businessProcessModel.getUser();
     }
 
     @Override
     protected LanguageModel getEmailLanguage(CustomerFeedbackEmailProcessModel businessProcessModel) {
-        return null;
+        return businessProcessModel.getLanguage();
     }
 
     // Getters and Setters
-
 
     @Override
     public ConfigurationService getConfigurationService() {
@@ -60,5 +66,21 @@ public class FeedbackEmailContext extends AbstractEmailContext<CustomerFeedbackE
     @Override
     public void setConfigurationService(ConfigurationService configurationService) {
         this.configurationService = configurationService;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

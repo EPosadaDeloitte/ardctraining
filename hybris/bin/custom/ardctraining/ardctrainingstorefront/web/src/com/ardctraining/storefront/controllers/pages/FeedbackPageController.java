@@ -1,5 +1,6 @@
 package com.ardctraining.storefront.controllers.pages;
 
+import com.ardctraining.core.model.CustomerFeedbackModel;
 import com.ardctraining.facades.feedback.FeedbackFacade;
 import com.ardctraining.facades.feedback.data.CustomerFeedbackData;
 import com.ardctraining.storefront.controllers.ControllerConstants;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Controller for customer feedback page
@@ -43,8 +46,10 @@ public class FeedbackPageController extends AbstractPageController {
         //System.out.println("I was called, my attribute message is "+model.getAttribute("message"));
         //System.out.println("message as path variable "+message2);
         System.out.println("Message is "+message);
+        List<CustomerFeedbackData> feedbacks = feedbackFacade.getFeedbackForms();
+        Collections.reverse(feedbacks); // data is already sorted in a desc order, this brings up newest feedbacks submitted (from most recent to oldest submitted feedback forms)
 
-        model.addAttribute("feedbacks",feedbackFacade.getFeedbackForms());
+        model.addAttribute("feedbacks", feedbacks);
         model.addAttribute("feedbackForm", new FeedbackForm());
         model.addAttribute("action","/feedback/processSubmission");
         model.addAttribute("pageTitle","Submit New Feedback");

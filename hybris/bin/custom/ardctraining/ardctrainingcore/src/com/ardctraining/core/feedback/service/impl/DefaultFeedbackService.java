@@ -7,6 +7,7 @@ import com.ardctraining.core.model.CustomerFeedbackEmailProcessModel;
 import com.ardctraining.core.model.CustomerFeedbackModel;
 import de.hybris.platform.core.model.c2l.LanguageModel;
 import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.processengine.BusinessProcessService;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.time.TimeService;
@@ -55,13 +56,19 @@ public class DefaultFeedbackService implements FeedbackService {
                 new StringBuilder().append("customerFeedbackEmailProcess").append("-").append(dateFormat.format(now)).toString(),
                 "customerFeedbackEmailProcess"
         );
+        //LanguageModel lang = new LanguageModel();
+        //lang.setIsocode("en");
 
         //emailProcessModel.setLanguage(customProductLabelCleanupCronjobModel.getSessionLanguage());
-        //emailProcessModel.setLanguage();
-        emailProcessModel.setSite(getBaseSiteService().getBaseSiteForUID("electronics"));
+        //emailProcessModel.setLanguage(lang); // hardcoded
+        emailProcessModel.setLanguage(getBaseSiteService().getCurrentBaseSite().getDefaultLanguage());
+        emailProcessModel.setSite(getBaseSiteService().getCurrentBaseSite());
+        //emailProcessModel.setSite(getBaseSiteService().getBaseSiteForUID("electronics"));
         // emailProcessModel.setCustomerFeedback();
         emailProcessModel.setSubject(customerFeedbackModel.getSubject());
         emailProcessModel.setMessage(customerFeedbackModel.getMessage());
+
+        emailProcessModel.setUser((UserModel) customerModel);
 
         modelService.save(emailProcessModel);
         getBusinessProcessService().startProcess(emailProcessModel); // actually sends the email, once object is ready

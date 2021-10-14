@@ -21,7 +21,7 @@
 
         <form:form method="post" modelAttribute="feedbackForm" action="${x}" style="padding: 20px;">
             <h1>${pageTitle}</h1>
-            <h2>You can submit new feedback regarding your experience with us. <br/> Please note the message should e longer than 10 characters long</h2>
+            <h2>You can submit new feedback regarding your experience with us. <br/> Please note the message should be longer than 10 characters long</h2>
 
             <formElement:formInputBox idKey="form.subject"
                 labelKey="form.subject" path="subject" inputCSS="form-control"
@@ -38,18 +38,32 @@
              </div>
         </form:form>
 
-        <div>
-            <c:if test="${feedbacks eq null}">
-                there are no submitted feedbacks
-            </c:if>
-            <ul>
-                <c:forEach items="${feedbacks}" var="feedback">
-                    <li>${feedback.subject}
-                    ${feedback.message}
-                    ${feedback.creationtime}
-                    ${feedback.status}</li>
-                </c:forEach>
-            </ul>
+        <div style="margin: 0px 20px;">
+            <c:choose>
+                <c:when test="${feedbacks eq null}">
+                    there are no submitted feedbacks
+                </c:when>
+                <c:otherwise>
+                     <table class="tg">
+                        <thead>
+                          <tr>
+                            <th style="font-weight: bold; text-align: left; padding-top: 20px;">Subject</th>
+                            <th style="font-weight: bold; text-align: left; padding-top: 20px;">Message</th>
+                            <th style="font-weight: bold; text-align: left; padding-top: 20px;">Submitted Date</th>
+                            <th style="font-weight: bold; text-align: left; padding-top: 20px;">Status</th>
+                          </tr>
+                        </thead>
+                        <c:forEach items="${feedbacks}" var="feedback">
+                            <tr>
+                                <td>${feedback.subject}</td>
+                                <td>${feedback.message}</td>
+                                <td>${feedback.creationtime}</td>
+                                <td>${feedback.status}</td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </c:otherwise>
+            </c:choose>
         </div>
 
     </div>
